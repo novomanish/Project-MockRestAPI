@@ -5,10 +5,20 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express5' });
+  res.render('form', { title: 'Express5' });
 });
 
-function handleResponse(resource, res){
+router.post('/', function(req, res, next) {
+    var resource = ds.put({
+        "uri": req.body.uri,
+        "body": req.body.body,
+        "callback": function(resource){
+            sendResourceResponse(resource, res);
+        }
+    });
+});
+
+function sendResourceResponse(resource, res){
     if(resource.headers){
         res.set(resource.headers);
     }
@@ -16,16 +26,11 @@ function handleResponse(resource, res){
 }
 router.get('/*', function(req, res, next) {
     ds.get(req.url, function(resource){
-        handleResponse(resource, res);
-    });
-});
-
-router.put('/*', function(req, res, next) {
-    var resource = ds.put({
-        "key": req.url,
-        "body": JSON.stringify(req.body),
-        "callback": function(resource){
-            handleResponse(resource, res);
+        if(resource === null){
+            res.status(404);
+            next();
+        }else{
+            sendResourceResponse(resource, res);
         }
     });
 });

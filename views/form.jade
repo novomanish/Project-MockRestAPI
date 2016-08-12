@@ -1,0 +1,13 @@
+//Created by mjaiswal on 12/08/16.
+extends index
+
+block head
+    script(type='text/javascript', src='/javascripts/form.js')
+
+block content
+    h1 API Mock Utility
+    form#form
+        input(type="text", name="uri", placeholder="URI ex: /expense-service/city").uri.extraHeight.floatLeft
+        input#fetch(type="button" value="Fetch").extraHeight.floatLeft
+        textarea.contentInput(placeholder="Type API Content Here", name="body").floatLeft
+        input#save(type="button" value="Save").extraHeight.floatLeft

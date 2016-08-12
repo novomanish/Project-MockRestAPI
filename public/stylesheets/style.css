@@ -6,3 +6,19 @@ body {
 a {
   color: #00B7FF;
 }
+
+.floatLeft{
+  float:left;
+}
+
+.extraHeight{
+  line-height: 2em;
+  font-size: large;
+}
+.uri{
+  width: 80%;
+}
+.contentInput{
+  width: 80%;
+  height: 500px;
+}
