@@ -11,8 +11,8 @@
         var uri = $("input[name=uri]").val(),
             form = $("#form");
         if(uri){
-            $.ajax(uri).done(function(response){
-                $("textarea[name=body]").val(response)
+            $.ajax(uri).done(function(response, status, ajax){
+                $("textarea[name=body]").val(ajax.responseText)
             }).fail(function(ajax){
                 $("textarea[name=body]").val(ajax.responseText);
             });
