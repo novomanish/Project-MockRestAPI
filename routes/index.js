@@ -19,7 +19,9 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/*', function(req, res, next) {
-    ds.get(req.url, function(resource){
+    var apiURI = "/" + req.params[0];
+
+    ds.get(apiURI, function(resource){
         if(resource === null){
             res.status(404);
             next();
