@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
     });
 });
 
-router.get('/*', function(req, res, next) {
+router.all('/*', function(req, res, next) {
     var apiURI = "/" + req.params[0];
 
     ds.get(apiURI, function(resource){
@@ -37,6 +37,11 @@ router.get('/*', function(req, res, next) {
 function sendResourceResponse(resource, res){
     // Default Header as application/json
     res.set("Content-Type", "application/json");
+
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
 
     if(resource.headers){
         res.set(resource.headers);
