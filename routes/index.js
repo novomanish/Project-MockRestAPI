@@ -18,12 +18,6 @@ router.post('/', function(req, res, next) {
     });
 });
 
-function sendResourceResponse(resource, res){
-    if(resource.headers){
-        res.set(resource.headers);
-    }
-    res.send(resource.body);
-}
 router.get('/*', function(req, res, next) {
     ds.get(req.url, function(resource){
         if(resource === null){
@@ -34,5 +28,15 @@ router.get('/*', function(req, res, next) {
         }
     });
 });
+
+function sendResourceResponse(resource, res){
+    // Default Header as application/json
+    res.set("Content-Type","application/json");
+
+    if(resource.headers){
+        res.set(resource.headers);
+    }
+    res.send(resource.body);
+}
 
 module.exports = router;
