@@ -1,5 +1,6 @@
-var express = require('express');
-var ds = require('../lib/DataSource');
+var express = require('express'),
+    url = require("url"),
+    ds = require('../lib/DataSource');
 
 var router = express.Router();
 
@@ -9,8 +10,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
+    var parsedURI = url.parse(req.body.uri);
+    var uri = parsedURI.pathname;
     var resource = ds.put({
-        "uri": req.body.uri,
+        "uri": uri,
         "body": req.body.body,
         "callback": function(resource){
             sendResourceResponse(resource, res);
