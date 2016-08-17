@@ -13,8 +13,8 @@
         if(uri){
             $.ajax(uri).done(function(response){
                 $("textarea[name=body]").val(response)
-            }).fail(function(){
-                $("textarea[name=body]").val("")
+            }).fail(function(ajax){
+                $("textarea[name=body]").val(ajax.responseText);
             });
         }else{
             alert("URI is empty")
