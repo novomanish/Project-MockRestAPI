@@ -31,12 +31,12 @@ router.get('/*', function(req, res, next) {
 
 function sendResourceResponse(resource, res){
     // Default Header as application/json
-    res.set("Content-Type","application/json");
+//    res.set({"Content-Type":"text/html"});
 
     if(resource.headers){
         res.set(resource.headers);
     }
-    res.send(resource.body);
+    res.json(resource.body);
 }
 
 module.exports = router;
